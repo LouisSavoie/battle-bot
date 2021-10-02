@@ -1,3 +1,5 @@
+[![Ruby Style Guide](https://img.shields.io/badge/code_style-rubocop-brightgreen.svg)](https://github.com/rubocop/rubocop)
+
 # BattleBot
 
 A simple Discord bot written in Ruby you can use to fight your friends!
