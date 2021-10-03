@@ -14,3 +14,5 @@ gem 'rubocop', '~> 1.7'
 gem 'rubocop-rspec', require: false
 
 gem 'rubocop-rake', require: false
+
+gem 'dotenv', '~> 2.1', '>= 2.1.1'
