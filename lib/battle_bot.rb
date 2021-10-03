@@ -11,9 +11,11 @@ module BattleBot
     attr_accessor :bot
   end
 
-  self.bot = Discordrb::Bot.new token: ENV['BOT_TOKEN']
+  if ENV['BOT_TOKEN']
+    self.bot = Discordrb::Bot.new token: ENV['BOT_TOKEN']
 
-  bot.message(with_text: 'Ping!') do |event|
-    event.respond 'Pong!'
+    bot.message(with_text: 'Ping!') do |event|
+      event.respond 'Pong!'
+    end
   end
 end
