@@ -15,4 +15,6 @@ gem 'rubocop-rspec', require: false
 
 gem 'rubocop-rake', require: false
 
+gem 'discordrb'
+
 gem 'dotenv', '~> 2.1', '>= 2.1.1'
