@@ -3,23 +3,23 @@
 require 'battle_bot/player'
 
 RSpec.describe BattleBot::Player do
-  it 'has an id' do
+  it 'has a user' do
     player = described_class.new(1, 10, 1, 1)
-    expect(player.id).to eq(1)
+    expect(player.user).to eq(1)
   end
 
-  it 'has hp' do
+  it 'has health' do
     player = described_class.new(1, 10, 1, 1)
-    expect(player.hp).to eq(10)
+    expect(player.health).to eq(10)
   end
-  
-  it 'has ap' do
+
+  it 'has damage' do
     player = described_class.new(1, 10, 1, 1)
-    expect(player.ap).to eq(1)
+    expect(player.damage).to eq(1)
   end
-  
-  it 'has sp' do
+
+  it 'has speed' do
     player = described_class.new(1, 10, 1, 1)
-    expect(player.sp).to eq(1)
+    expect(player.speed).to eq(1)
   end
 end

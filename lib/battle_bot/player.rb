@@ -3,13 +3,13 @@
 module BattleBot
   # Player class for storing player stats
   class Player
-    attr_reader :id, :hp, :ap, :sp
+    attr_reader :user, :health, :damage, :speed
 
-    def initialize(id, hp, ap, sp)
-      @id = id
-      @hp = hp
-      @ap = ap
-      @sp = sp
+    def initialize(user, health, damage, speed)
+      @user = user
+      @health = health
+      @damage = damage
+      @speed = speed
     end
   end
 end
