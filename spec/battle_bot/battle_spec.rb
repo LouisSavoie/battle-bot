@@ -4,16 +4,15 @@ require 'battle_bot/battle'
 require 'battle_bot/player'
 
 RSpec.describe BattleBot::Battle do
-  let(:player1) { BattleBot::Player.new(1, 10, 1, 1) }
-  let(:player2) { BattleBot::Player.new(1, 10, 2, 2) }
-  let(:battle) {described_class.new(player1, player2, 'log')}
+  let(:player) { BattleBot::Player.new(1, 10, 1, 1) }
+  let(:battle) { described_class.new(player, player, 'log') }
 
   it 'has a player1' do
-    expect(battle.player1).to eq(player1)
+    expect(battle.player1).to eq(player)
   end
 
   it 'has a player2' do
-    expect(battle.player2).to eq(player2)
+    expect(battle.player2).to eq(player)
   end
 
   it 'has a log' do
