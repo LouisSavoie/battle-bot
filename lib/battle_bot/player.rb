@@ -14,7 +14,7 @@ module BattleBot
     end
 
     def level_up
-      stats = [ 'health','damage','speed' ]
+      stats = %w[health damage speed]
       stat = stats.sample
       stat_value = send(stat)
       send("#{stat}=", stat_value + 1)
