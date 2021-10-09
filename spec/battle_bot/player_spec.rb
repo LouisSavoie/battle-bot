@@ -23,14 +23,8 @@ RSpec.describe BattleBot::Player do
 
   describe '.level_up' do
     it 'levels up player health, damage, or speed by 1' do
-      player.level_up
-      if player.health > 1
-        expect(player.health).to eq(2)
-      elsif player.damage > 1
-        expect(player.damage).to eq(2)
-      else
-        expect(player.speed).to eq(2)
-      end
+      stat = player.level_up
+      expect(player.send(stat)).to eq(2)
     end
   end
 end

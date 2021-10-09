@@ -3,7 +3,8 @@
 module BattleBot
   # Player class for storing player stats
   class Player
-    attr_reader :user, :health, :damage, :speed
+    attr_reader :user
+    attr_accessor :health, :damage, :speed
 
     def initialize(user, health, damage, speed)
       @user = user
@@ -13,15 +14,11 @@ module BattleBot
     end
 
     def level_up
-      random = rand(1..3)
-      case random
-      when 1
-        @health += 1
-      when 2
-        @damage += 1
-      else
-        @speed += 1
-      end
+      stats = { '1': 'health', '2': 'damage', '3': 'speed' }
+      stat = stats[rand(1..3).to_s.to_sym]
+      stat_value = send(stat)
+      send("#{stat}=", stat_value + 1)
+      stat
     end
   end
 end
