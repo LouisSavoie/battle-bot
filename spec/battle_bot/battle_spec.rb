@@ -18,4 +18,9 @@ RSpec.describe BattleBot::Battle do
   it 'has a log' do
     expect(battle.log).to eq('log')
   end
+
+  it 'can add to it\'s log' do
+    battle.log += '\nPlayer1 Wins!'
+    expect(battle.log).to eq('log\nPlayer1 Wins!')
+  end
 end

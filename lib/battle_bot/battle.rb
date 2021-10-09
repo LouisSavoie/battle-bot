@@ -3,7 +3,8 @@
 module BattleBot
   # Battle class for storing current battle players
   class Battle
-    attr_reader :player1, :player2, :log
+    attr_reader :player1, :player2
+    attr_accessor :log
 
     def initialize(player1, player2, log)
       @player1 = player1
