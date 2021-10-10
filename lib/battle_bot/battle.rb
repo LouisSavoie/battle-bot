@@ -11,5 +11,9 @@ module BattleBot
       @player2 = player2
       @log = log
     end
+
+    def fight
+      log
+    end
   end
 end

@@ -23,4 +23,10 @@ RSpec.describe BattleBot::Battle do
     battle.log += '\nPlayer1 Wins!'
     expect(battle.log).to eq('log\nPlayer1 Wins!')
   end
+
+  describe '.fight' do
+    it 'returns it\'s log' do
+      expect(battle.fight).to eq(battle.log)
+    end
+  end
 end
