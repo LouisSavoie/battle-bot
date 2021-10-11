@@ -40,4 +40,18 @@ RSpec.describe BattleBot::Battle do
       expect(battle.log.count).to eq(1)
     end
   end
+
+  describe '.attack' do
+    before do
+      battle.attack(battle.player1, battle.player2)
+    end
+
+    it 'updates player health' do
+      expect(battle.player2.health).to be < 10
+    end
+
+    it 'adds to the log' do
+      expect(battle.log.count).to eq(1)
+    end
+  end
 end

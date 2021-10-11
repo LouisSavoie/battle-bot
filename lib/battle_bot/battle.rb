@@ -22,5 +22,11 @@ module BattleBot
       log.push("Initiative: #{player1.name} got #{player1_initiative}, #{player2.name} got #{player2_initiative}")
       player1_initiative > player2_initiative ? player1 : player2
     end
+
+    def attack(attacking_player, defending_player)
+      damage = rand(1..attacking_player.damage)
+      defending_player.health -= damage
+      log.push("#{attacking_player.name} dealt #{damage} damage to #{defending_player.name}")
+    end
   end
 end
