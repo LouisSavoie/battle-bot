@@ -4,7 +4,7 @@ require 'battle_bot/battle'
 require 'battle_bot/player'
 
 RSpec.describe BattleBot::Battle do
-  let(:player) { BattleBot::Player.new(1, 10, 1, 1) }
+  let(:player) { BattleBot::Player.new(1, 'Bob', 10, 1, 1) }
   let(:battle) { described_class.new(player, player) }
 
   it 'has a player1' do
