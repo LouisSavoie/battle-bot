@@ -19,7 +19,7 @@ module BattleBot
     def initiative
       player1_initiative = rand(1..20) + player1.speed
       player2_initiative = rand(1..20) + player2.speed
-      log.push("Initiative: Player1 got #{player1_initiative},Player2 got #{player2_initiative}")
+      log.push("Initiative: #{player1.name} got #{player1_initiative}, #{player2.name} got #{player2_initiative}")
       player1_initiative > player2_initiative ? player1 : player2
     end
   end
