@@ -18,20 +18,14 @@ module BattleBot
         players = initiative
         attack(players[0], players[1])
         death = death_check(players[1])
-        if death
-          log.push("#{players[1].name} is dead.", "#{players[0].name} wins the battle!")
-          stat = players[0].level_up
-          log.push("#{players[0].name} leveled up! Their #{stat} increased by 1!")
-        end
+        autopsy(players[1], players[0]) if death
         next if death
 
         attack(players[1], players[0])
         death = death_check(players[0])
         next unless death
 
-        log.push("#{players[0].name} is dead.", "#{players[1].name} wins the battle!")
-        stat = players[1].level_up
-        log.push("#{players[1].name} leveled up! Their #{stat} increased by 1!")
+        autopsy(players[0], players[1])
       end
       log
     end
@@ -53,6 +47,12 @@ module BattleBot
 
     def death_check(player)
       player.health <= 0
+    end
+
+    def autopsy(dead_player, winning_player)
+      log.push("#{dead_player.name} is dead.", "#{winning_player.name} wins the battle!")
+      stat = winning_player.level_up
+      log.push("#{winning_player.name} leveled up! Their #{stat} increased by 1!")
     end
   end
 end

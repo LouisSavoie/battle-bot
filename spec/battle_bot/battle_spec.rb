@@ -66,4 +66,11 @@ RSpec.describe BattleBot::Battle do
       expect(battle.death_check(battle.player1)).to be(true).or be(false)
     end
   end
+
+  describe '.autopsy' do
+    it 'adds 3 elements to the log' do
+      battle.autopsy(player, player2)
+      expect(battle.log.count).to eq(3)
+    end
+  end
 end
