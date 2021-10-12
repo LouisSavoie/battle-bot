@@ -54,4 +54,10 @@ RSpec.describe BattleBot::Battle do
       expect(battle.log.count).to eq(1)
     end
   end
+
+  describe '.death_check' do
+    it 'returns true or false' do
+      expect(battle.death_check(battle.player1)).to be(true).or be(false)
+    end
+  end
 end

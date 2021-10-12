@@ -28,5 +28,9 @@ module BattleBot
       defending_player.health -= damage
       log.push("#{attacking_player.name} dealt #{damage} damage to #{defending_player.name}")
     end
+
+    def death_check(player)
+      player.health <= 0
+    end
   end
 end
