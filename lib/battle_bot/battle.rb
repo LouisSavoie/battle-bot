@@ -16,16 +16,10 @@ module BattleBot
       death = false
       until death
         players = initiative
-        attack(players[0], players[1])
-        death = death_check(players[1])
-        autopsy(players[1], players[0]) if death
+        death = combat(players[0], players[1])
         next if death
 
-        attack(players[1], players[0])
-        death = death_check(players[0])
-        next unless death
-
-        autopsy(players[0], players[1])
+        death = combat(players[1], players[0])
       end
       log
     end
@@ -36,6 +30,13 @@ module BattleBot
       log.push("\n",
                "Initiative: #{player1.name} got #{player1_initiative}, #{player2.name} got #{player2_initiative}")
       player1_initiative > player2_initiative ? [player1, player2] : [player2, player1]
+    end
+
+    def combat(attacking_player, defending_player)
+      attack(attacking_player, defending_player)
+      death = death_check(defending_player)
+      autopsy(defending_player, attacking_player) if death
+      death
     end
 
     def attack(attacking_player, defending_player)

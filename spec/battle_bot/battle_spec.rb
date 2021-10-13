@@ -47,6 +47,12 @@ RSpec.describe BattleBot::Battle do
     end
   end
 
+  describe '.combat' do
+    it 'returns true or false' do
+      expect(battle.combat(battle.player1, battle.player2)).to be(true).or be(false)
+    end
+  end
+
   describe '.attack' do
     before do
       battle.attack(battle.player1, battle.player2)
