@@ -5,8 +5,8 @@ require 'battle_bot/battle'
 require 'battle_bot/player'
 
 RSpec.describe BattleBot::Server do
-  let(:player) { BattleBot::Player.new(1, 10, 1, 1) }
-  let(:battle) { BattleBot::Battle.new(player, player, 'log') }
+  let(:player) { BattleBot::Player.new(1, 'Bob', 10, 1, 1) }
+  let(:battle) { BattleBot::Battle.new(player, player) }
   let(:server) { described_class.new }
 
   it 'has a battles hash' do
