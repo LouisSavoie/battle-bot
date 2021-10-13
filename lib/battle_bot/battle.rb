@@ -25,11 +25,16 @@ module BattleBot
     end
 
     def initiative
+      initiatives = roll_initiatives
+      log.push("\n",
+               "Initiative: #{player1.name} got #{initiatives[0]}, #{player2.name} got #{initiatives[1]}")
+      initiatives[0] > initiatives[1] ? [player1, player2] : [player2, player1]
+    end
+
+    def roll_initiatives
       player1_initiative = rand(1..20) + player1.speed
       player2_initiative = rand(1..20) + player2.speed
-      log.push("\n",
-               "Initiative: #{player1.name} got #{player1_initiative}, #{player2.name} got #{player2_initiative}")
-      player1_initiative > player2_initiative ? [player1, player2] : [player2, player1]
+      [player1_initiative, player2_initiative]
     end
 
     def combat(attacking_player, defending_player)
