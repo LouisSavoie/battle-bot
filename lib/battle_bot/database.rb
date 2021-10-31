@@ -8,5 +8,9 @@ module BattleBot
     def initialize
       @data = {}
     end
+
+    def new_file(data_file = 'data.yml')
+      File.open(data_file, 'w') { |file| file.write('') }
+    end
   end
 end
