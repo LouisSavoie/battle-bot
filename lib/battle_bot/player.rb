@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module BattleBot
-  # Player class for storing player stats
+  # Player class for storing player stats and methods
   class Player
     attr_reader :user, :name
     attr_accessor :health, :damage, :speed
