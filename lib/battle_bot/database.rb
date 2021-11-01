@@ -9,6 +9,7 @@ module BattleBot
 
     def initialize
       @data = {}
+      read_file
     end
 
     def new_file(data_file = 'data.yml')

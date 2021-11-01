@@ -4,12 +4,16 @@ require 'battle_bot/database'
 require 'yaml'
 
 RSpec.describe BattleBot::Database do
-  let(:database) { described_class.new }
+  subject(:database) { described_class.new }
 
-  testdata = { server1: { battle1: { player1: 'Tom', player2: 'Jake' },
-                          battle2: { player1: 'Carol', player2: 'Jackie' } },
-               server2: { battle1: { player1: 'DQ', player2: 'Dave' },
-                          battle2: { player1: 'Joe', player2: 'Tyler' } } }
+  let(:testdata) do
+    { server1: { battle1: { player1: 'Tom', player2: 'Jake' },
+                 battle2: { player1: 'Carol', player2: 'Jackie' } },
+      server2: { battle1: { player1: 'DQ', player2: 'Dave' },
+                 battle2: { player1: 'Joe', player2: 'Tyler' } } }
+  end
+
+  after { File.delete('data.yml') }
 
   it 'has a data hash' do
     expect(database.data.class).to eq(Hash)
