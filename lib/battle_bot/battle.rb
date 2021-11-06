@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module BattleBot
-  # Battle class for storing current battle players
+  # Battle class for storing players, battle log, and methods
   class Battle
     attr_reader :player1, :player2
     attr_accessor :log
