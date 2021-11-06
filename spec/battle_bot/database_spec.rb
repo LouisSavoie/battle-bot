@@ -19,9 +19,9 @@ RSpec.describe BattleBot::Database do
     expect(database.data.class).to eq(Hash)
   end
 
-  describe '.new_file' do
-    it 'creates a blank yaml file' do
-      database.new_file('test.yml')
+  describe '.write_file' do
+    it 'writes @data to YAML file' do
+      database.write_file('test.yml')
       expect(YAML.safe_load(File.read('test.yml'))).to eq(database.data)
       File.delete('test.yml')
     end
