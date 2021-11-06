@@ -12,11 +12,11 @@ module BattleBot
       read_file
     end
 
-    def write_file(data_file = 'data.yml')
+    def write_file(data_file = 'data.yaml')
       File.open(data_file, 'w') { |file| file.write(@data) }
     end
 
-    def read_file(data_file = 'data.yml')
+    def read_file(data_file = 'data.yaml')
       data_from_file = YAML.safe_load(File.read(data_file), [Symbol])
     rescue Errno::ENOENT
       write_file(data_file)

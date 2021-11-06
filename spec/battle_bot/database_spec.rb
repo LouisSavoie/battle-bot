@@ -13,26 +13,24 @@ RSpec.describe BattleBot::Database do
                  battle2: { player1: 'Joe', player2: 'Tyler' } } }
   end
 
-  after { File.delete('data.yml') }
-
   it 'has a data hash' do
     expect(database.data.class).to eq(Hash)
   end
 
   describe '.write_file' do
     it 'writes @data to YAML file' do
-      database.write_file('test.yml')
-      expect(YAML.safe_load(File.read('test.yml'))).to eq(database.data)
-      File.delete('test.yml')
+      database.write_file('test.yaml')
+      expect(YAML.safe_load(File.read('test.yaml'))).to eq(database.data)
+      File.delete('test.yaml')
     end
   end
 
   describe '.read_file' do
     it 'reads YAML file into @data' do
-      File.open('readtest.yml', 'w') { |file| file.write(testdata.to_yaml) }
-      database.read_file('readtest.yml')
+      File.open('readtest.yaml', 'w') { |file| file.write(testdata.to_yaml) }
+      database.read_file('readtest.yaml')
       expect(database.data).to eq(testdata)
-      File.delete('readtest.yml')
+      File.delete('readtest.yaml')
     end
   end
 end

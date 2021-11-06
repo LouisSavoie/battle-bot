@@ -12,3 +12,8 @@
 
 .env
 scratchpad.rb
+
+# Database and testing YAML files
+data.yaml
+test.yaml
+readtest.yaml
