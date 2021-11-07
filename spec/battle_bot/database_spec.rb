@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'battle_bot/database'
+require 'battle_bot/server'
 require 'yaml'
 
 RSpec.describe BattleBot::Database do
@@ -31,6 +32,15 @@ RSpec.describe BattleBot::Database do
       database.read_file('readtest.yaml')
       expect(database.data).to eq(testdata)
       File.delete('readtest.yaml')
+    end
+  end
+
+  describe '.add_server' do
+    let(:test_server) { BattleBot::Server.new('test') }
+
+    it 'adds a server to @data' do
+      database.add_server(test_server)
+      expect(database.data).to eq({ 'test' => test_server })
     end
   end
 end

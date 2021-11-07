@@ -3,9 +3,10 @@
 module BattleBot
   # Server class for storing current battles
   class Server
-    attr_reader :battles
+    attr_reader :battles, :server_id
 
-    def initialize(battles = {})
+    def initialize(server_id, battles = {})
+      @server_id = server_id
       @battles = battles
     end
 
