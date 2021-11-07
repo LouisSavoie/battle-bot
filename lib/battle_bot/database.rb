@@ -24,5 +24,9 @@ module BattleBot
     else
       @data = data_from_file
     end
+
+    def add_server(server)
+      @data[server.server_id] = server
+    end
   end
 end

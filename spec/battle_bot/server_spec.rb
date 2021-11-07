@@ -7,10 +7,18 @@ require 'battle_bot/player'
 RSpec.describe BattleBot::Server do
   let(:player) { BattleBot::Player.new(1, 'Bob', 10, 1, 1) }
   let(:battle) { BattleBot::Battle.new(player, player) }
-  let(:server) { described_class.new }
+  let(:server) { described_class.new('test') }
 
   it 'has a battles hash' do
     expect(server.battles.class).to eq(Hash)
+  end
+
+  it 'has a players hash' do
+    expect(server.players.class).to eq(Hash)
+  end
+
+  it 'has an id' do
+    expect(server.server_id).to eq('test')
   end
 
   describe '.add_battle' do
