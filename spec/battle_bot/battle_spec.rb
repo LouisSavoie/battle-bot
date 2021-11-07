@@ -28,7 +28,7 @@ RSpec.describe BattleBot::Battle do
   describe '.fight' do
     it 'returns it\'s log' do
       expect(battle.fight).to eq(battle.log)
-      puts battle.log
+      # puts battle.log
     end
   end
 

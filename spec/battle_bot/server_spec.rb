@@ -13,6 +13,10 @@ RSpec.describe BattleBot::Server do
     expect(server.battles.class).to eq(Hash)
   end
 
+  it 'has a players hash' do
+    expect(server.players.class).to eq(Hash)
+  end
+
   it 'has an id' do
     expect(server.server_id).to eq('test')
   end

@@ -5,8 +5,8 @@ require 'battle_bot/player'
 RSpec.describe BattleBot::Player do
   let(:player) { described_class.new(1, 'Bob', 1, 1, 1) }
 
-  it 'has a user' do
-    expect(player.user).to eq(1)
+  it 'has a user_id' do
+    expect(player.user_id).to eq(1)
   end
 
   it 'has a name' do

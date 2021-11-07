@@ -3,19 +3,28 @@
 module BattleBot
   # Server class for storing current battles
   class Server
-    attr_reader :battles, :server_id
+    attr_reader :server_id, :battles, :players
 
-    def initialize(server_id, battles = {})
+    def initialize(server_id, battles = {}, players = {})
       @server_id = server_id
       @battles = battles
+      @players = players
     end
 
-    def add_battle(key, battle)
-      battles[key] = battle
+    def add_battle(battle_id, battle)
+      battles[battle_id] = battle
     end
 
-    def remove_battle(key)
-      battles.delete(key)
+    def remove_battle(battle_id)
+      battles.delete(battle_id)
+    end
+
+    def add_player(player)
+      players[player.user_id] = player
+    end
+
+    def remove_player(user_id)
+      players.delete(user_id)
     end
   end
 end
