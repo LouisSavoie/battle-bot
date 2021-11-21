@@ -7,17 +7,17 @@ module BattleBot
   class Database
     attr_reader :data
 
-    def initialize
+    def initialize(data_file = 'data.yaml')
       @data = {}
-      read_file
+      read_file(data_file)
     end
 
     def write_file(data_file = 'data.yaml')
-      File.open(data_file, 'w') { |file| file.write(@data) }
+      File.open(data_file, 'w') { |file| file.write(@data.to_yaml) }
     end
 
     def read_file(data_file = 'data.yaml')
-      data_from_file = YAML.safe_load(File.read(data_file), [Symbol])
+      data_from_file = YAML.safe_load(File.read(data_file), [Symbol, BattleBot::Server])
     rescue Errno::ENOENT
       write_file(data_file)
       @data = YAML.safe_load(File.read(data_file))

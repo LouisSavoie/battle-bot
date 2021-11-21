@@ -6,7 +6,7 @@ module BattleBot
     attr_reader :user_id, :name
     attr_accessor :health, :damage, :speed
 
-    def initialize(user_id, name, health, damage, speed)
+    def initialize(user_id, name, health = 10, damage = 1, speed = 0)
       @user_id = user_id
       @name = name
       @health = health
