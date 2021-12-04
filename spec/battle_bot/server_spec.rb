@@ -38,4 +38,19 @@ RSpec.describe BattleBot::Server do
       expect(server.battles['01_02']).to eq(nil)
     end
   end
+
+  describe '.add_player' do
+    it 'can add players' do
+      server.add_player(player)
+      expect(server.players[1]).to eq(player)
+    end
+  end
+
+  describe '.remove_player' do
+    it 'can remove players' do
+      server.add_player(player)
+      server.remove_player(1)
+      expect(server.players[1]).to eq(nil)
+    end
+  end
 end

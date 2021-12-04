@@ -35,18 +35,12 @@ module BattleBot
       # base case, create the battle
       else
         # create the server if it doesn't exist in db
-        # add a Database.include? method to call instead of this
-        unless db.data.include? event.server.id
-          # add this to the Database.add_server method, rubo cop might force you to make helper methods for it
-          server = BattleBot::Server.new event.server.id
-          db.add_server server
-          puts 'server added'
-          db.write_file
-          puts 'db saved to file'
-        end
-        # do more stuff
-        # player1 = BattleBot::Player.new event.author.id, event.author.name
-        # player2 = BattleBot::Player.new event.message.mentions[0].id, event.message.mentions[0].name
+        db.add_server BattleBot::Server.new event.server.id
+        # create players if they don't exist in db>server
+        player1 = BattleBot::Player.new event.author.id, event.author.name
+        db.add_player event.server.id, player1
+        player2 = BattleBot::Player.new event.message.mentions[0].id, event.message.mentions[0].name
+        db.add_player event.server.id, player2
         # send confirmation of challenge
         event.respond "#{event.author.mention} challenges #{event.message.mentions[0].mention}!"
       end
