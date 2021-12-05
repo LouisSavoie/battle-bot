@@ -23,19 +23,19 @@ RSpec.describe BattleBot::Server do
 
   describe '.add_battle' do
     it 'can add battles' do
-      server.add_battle('01_02', battle)
-      expect(server.battles['01_02']).to eq(battle)
+      server.add_battle(battle)
+      expect(server.battles['1_1']).to eq(battle)
     end
   end
 
   describe '.remove_battle' do
     before do
-      server.add_battle('01_02', battle)
+      server.add_battle(battle)
     end
 
     it 'can delete battles' do
-      server.remove_battle('01_02')
-      expect(server.battles['01_02']).to eq(nil)
+      server.remove_battle('1_1')
+      expect(server.battles['1_1']).to eq(nil)
     end
   end
 

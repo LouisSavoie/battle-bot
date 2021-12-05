@@ -3,10 +3,11 @@
 module BattleBot
   # Battle class for storing players, battle log, and methods
   class Battle
-    attr_reader :player1, :player2
+    attr_reader :player1, :player2, :battle_id
     attr_accessor :log
 
     def initialize(player1, player2)
+      @battle_id = "#{player1.user_id}_#{player2.user_id}"
       @player1 = player1
       @player2 = player2
       @log = []

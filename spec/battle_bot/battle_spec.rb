@@ -8,6 +8,10 @@ RSpec.describe BattleBot::Battle do
   let(:player2) { BattleBot::Player.new(1, 'Steve', 10, 1, 1) }
   let(:battle) { described_class.new(player, player2) }
 
+  it 'has an id' do
+    expect(battle.battle_id).to eq('1_1')
+  end
+
   it 'has a player1' do
     expect(battle.player1).to eq(player)
   end

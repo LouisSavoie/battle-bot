@@ -43,5 +43,14 @@ module BattleBot
       write_file(data_file)
       puts 'Database saved to file'
     end
+
+    def add_battle(server_id, battle, data_file = 'data.yaml')
+      return if @data[server_id].battles[battle.battle_id]
+
+      @data[server_id].add_battle battle
+      puts 'Battle added to server in database'
+      write_file(data_file)
+      puts 'Database saved to file'
+    end
   end
 end

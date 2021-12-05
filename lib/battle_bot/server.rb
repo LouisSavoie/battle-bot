@@ -11,8 +11,8 @@ module BattleBot
       @players = players
     end
 
-    def add_battle(battle_id, battle)
-      battles[battle_id] = battle
+    def add_battle(battle)
+      battles[battle.battle_id] = battle
     end
 
     def remove_battle(battle_id)

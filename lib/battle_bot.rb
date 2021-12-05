@@ -41,6 +41,9 @@ module BattleBot
         db.add_player event.server.id, player1
         player2 = BattleBot::Player.new event.message.mentions[0].id, event.message.mentions[0].name
         db.add_player event.server.id, player2
+        # create battle and add to server
+        battle = BattleBot::Battle.new player1, player2
+        db.add_battle event.server.id, battle
         # send confirmation of challenge
         event.respond "#{event.author.mention} challenges #{event.message.mentions[0].mention}!"
       end

@@ -2,6 +2,7 @@
 
 require 'battle_bot/database'
 require 'battle_bot/server'
+require 'battle_bot/battle'
 require 'battle_bot/player'
 require 'yaml'
 
@@ -16,6 +17,7 @@ RSpec.describe BattleBot::Database do
   end
   let(:test_server) { BattleBot::Server.new(555) }
   let(:test_player) { BattleBot::Player.new(1, 'Bob', 10, 1, 1) }
+  let(:test_battle) { BattleBot::Battle.new(test_player, test_player) }
 
   it 'has a data hash' do
     expect(database.data.class).to eq(Hash)
@@ -51,6 +53,15 @@ RSpec.describe BattleBot::Database do
       database.add_server(test_server, 'test.yaml')
       database.add_player(555, test_player, 'test.yaml')
       expect(database.data[555].players).to eq({ 1 => test_player })
+      File.delete('test.yaml')
+    end
+  end
+
+  describe '.add_battle' do
+    it 'adds a battle to a server in @data' do
+      database.add_server(test_server, 'test.yaml')
+      database.add_battle(555, test_battle, 'test.yaml')
+      expect(database.data[555].battles).to eq({ '1_1' => test_battle })
       File.delete('test.yaml')
     end
   end
