@@ -27,8 +27,7 @@ module BattleBot
 
     def initiative
       initiatives = roll_initiatives
-      log.push("\n",
-               "Initiative: #{player1.name} got #{initiatives[0]}, #{player2.name} got #{initiatives[1]}")
+      log.push("\n\n**Initiative**: #{player1.name} got #{initiatives[0]}, #{player2.name} got #{initiatives[1]}")
       initiatives[0] > initiatives[1] ? [player1, player2] : [player2, player1]
     end
 
@@ -48,8 +47,8 @@ module BattleBot
     def attack(attacking_player, defending_player)
       damage = rand(1..attacking_player.damage)
       defending_player.health -= damage
-      log.push("#{attacking_player.name} dealt #{damage} damage to #{defending_player.name}",
-               "#{defending_player.name}'s health is now #{defending_player.health}.")
+      log.push("\n**#{attacking_player.name}** dealt **#{damage}** damage to **#{defending_player.name}**",
+               "\n**#{defending_player.name}'s** health is now **#{defending_player.health}**.")
     end
 
     def death_check(player)
@@ -57,9 +56,9 @@ module BattleBot
     end
 
     def autopsy(dead_player, winning_player)
-      log.push("#{dead_player.name} is dead.", "#{winning_player.name} wins the battle!")
+      log.push("\n**#{dead_player.name}** is **dead**. **#{winning_player.name}** wins the battle!")
       stat = winning_player.level_up
-      log.push("#{winning_player.name} leveled up! Their #{stat} increased by 1!")
+      log.push("\n**#{winning_player.name}** leveled up! Their **#{stat}** increased by **1**!")
     end
   end
 end

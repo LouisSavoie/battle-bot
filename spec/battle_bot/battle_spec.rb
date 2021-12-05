@@ -45,9 +45,9 @@ RSpec.describe BattleBot::Battle do
       expect(battle.initiative).to all(be_an(BattleBot::Player))
     end
 
-    it 'adds two elements to the log' do
+    it 'adds to the log' do
       battle.initiative
-      expect(battle.log.count).to eq(2)
+      expect(battle.log.count).to eq(1)
     end
   end
 
@@ -78,9 +78,9 @@ RSpec.describe BattleBot::Battle do
   end
 
   describe '.autopsy' do
-    it 'adds 3 elements to the log' do
+    it 'adds 2 elements to the log' do
       battle.autopsy(player, player2)
-      expect(battle.log.count).to eq(3)
+      expect(battle.log.count).to eq(2)
     end
   end
 end

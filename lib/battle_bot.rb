@@ -52,11 +52,23 @@ module BattleBot
     end
 
     bot.command :accept do |event|
+      # ignore messages not in the bb-arena channel
       if event.channel.name == 'bb-arena'
+        # respond to challenges without a mention
         if event.message.mentions.empty?
           event.respond 'Who\'s challenge are you accepting?'
-        else
+        # respond to challenging the bot
+        elsif event.message.mentions[0].mention == "<@#{bot.profile.id}>"
+          event.respond "#{event.author.mention}, I'm just the ref here."
+        # base case, run the battle
+        elsif db.data[event.server.id].battles["#{event.message.mentions[0].id}_#{event.author.id}"]
           event.respond "#{event.author.mention} accepts #{event.message.mentions[0].mention}'s challenge!"
+          res = db.data[event.server.id].battles["#{event.message.mentions[0].id}_#{event.author.id}"].fight
+          res_arr = res.each_slice(40)
+          res_arr.each { |res_part| event.respond res_part.join('') }
+        # respond if cannot find battle
+        else
+          event.respond "I cannot find a challenge from #{event.message.mentions[0].mention} for you."
         end
       end
     end
