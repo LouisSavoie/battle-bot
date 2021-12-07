@@ -52,5 +52,20 @@ module BattleBot
       write_file(data_file)
       puts 'Database saved to file'
     end
+
+    def update_player(server_id, player, data_file = 'data.yaml')
+      @data[server_id].remove_player(player.user_id)
+      @data[server_id].add_player player
+      puts 'Player updated for server in database'
+      write_file(data_file)
+      puts 'Database saved to file'
+    end
+
+    def remove_battle(server_id, battle_id, data_file = 'data.yaml')
+      @data[server_id].remove_battle battle_id
+      puts 'Battle added to server in database'
+      write_file(data_file)
+      puts 'Database saved to file'
+    end
   end
 end

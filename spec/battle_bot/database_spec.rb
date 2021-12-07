@@ -65,4 +65,29 @@ RSpec.describe BattleBot::Database do
       File.delete('test.yaml')
     end
   end
+
+  describe '.update_player' do
+    before do
+      database.add_server(test_server, 'test.yaml')
+      database.add_player(555, test_player, 'test.yaml')
+      database.add_battle(555, test_battle, 'test.yaml')
+    end
+
+    it 'updates player in server' do
+      res = database.data[555].battles['1_1'].fight
+      database.update_player(555, res[1], 'test.yaml')
+      expect(database.data[555].players).to eq({ 1 => test_player })
+      File.delete('test.yaml')
+    end
+  end
+
+  describe '.remove_battle' do
+    it 'removes a battle from a server in @data' do
+      database.add_server(test_server, 'test.yaml')
+      database.add_battle(555, test_battle, 'test.yaml')
+      database.remove_battle(555, '1_1', 'test.yaml')
+      expect(database.data[555].battles).to eq({})
+      File.delete('test.yaml')
+    end
+  end
 end

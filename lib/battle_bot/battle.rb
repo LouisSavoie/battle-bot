@@ -14,15 +14,15 @@ module BattleBot
     end
 
     def fight
-      death = false
-      until death
+      death = [false]
+      until death[0]
         players = initiative
         death = combat(players[0], players[1])
         next if death
 
         death = combat(players[1], players[0])
       end
-      log
+      [log, death[1]]
     end
 
     def initiative
@@ -41,7 +41,7 @@ module BattleBot
       attack(attacking_player, defending_player)
       death = death_check(defending_player)
       autopsy(defending_player, attacking_player) if death
-      death
+      [death, attacking_player]
     end
 
     def attack(attacking_player, defending_player)

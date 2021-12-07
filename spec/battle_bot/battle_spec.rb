@@ -31,8 +31,11 @@ RSpec.describe BattleBot::Battle do
 
   describe '.fight' do
     it 'returns it\'s log' do
-      expect(battle.fight).to eq(battle.log)
-      # puts battle.log
+      expect(battle.fight[0]).to eq(battle.log)
+    end
+
+    it 'returns the winning player' do
+      expect(battle.fight[1]).to be_a_kind_of BattleBot::Player
     end
   end
 
@@ -53,7 +56,11 @@ RSpec.describe BattleBot::Battle do
 
   describe '.combat' do
     it 'returns true or false' do
-      expect(battle.combat(battle.player1, battle.player2)).to be(true).or be(false)
+      expect(battle.combat(battle.player1, battle.player2)[0]).to be(true).or be(false)
+    end
+
+    it 'returns the winning player' do
+      expect(battle.combat(battle.player1, battle.player2)[1]).to be_a_kind_of BattleBot::Player
     end
   end
 

@@ -64,8 +64,11 @@ module BattleBot
         elsif db.data[event.server.id].battles["#{event.message.mentions[0].id}_#{event.author.id}"]
           event.respond "#{event.author.mention} accepts #{event.message.mentions[0].mention}'s challenge!"
           res = db.data[event.server.id].battles["#{event.message.mentions[0].id}_#{event.author.id}"].fight
-          res_arr = res.each_slice(40)
+          res_arr = res[0].each_slice(40)
           res_arr.each { |res_part| event.respond res_part.join('') }
+          db.update_player(event.server.id, res[1])
+          db.remove_battle(event.server.id, "#{event.message.mentions[0].id}_#{event.author.id}")
+          puts db.data[event.server.id].players
         # respond if cannot find battle
         else
           event.respond "I cannot find a challenge from #{event.message.mentions[0].mention} for you."
