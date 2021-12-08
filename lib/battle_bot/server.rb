@@ -7,12 +7,12 @@ module BattleBot
 
     def initialize(server_id, battles = {}, players = {})
       @server_id = server_id
-      @battles = battles
       @players = players
+      @battles = battles
     end
 
-    def add_battle(battle_id, battle)
-      battles[battle_id] = battle
+    def add_battle(battle)
+      battles[battle.battle_id] = battle
     end
 
     def remove_battle(battle_id)

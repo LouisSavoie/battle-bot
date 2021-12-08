@@ -8,6 +8,10 @@ RSpec.describe BattleBot::Battle do
   let(:player2) { BattleBot::Player.new(1, 'Steve', 10, 1, 1) }
   let(:battle) { described_class.new(player, player2) }
 
+  it 'has an id' do
+    expect(battle.battle_id).to eq('1_1')
+  end
+
   it 'has a player1' do
     expect(battle.player1).to eq(player)
   end
@@ -27,8 +31,11 @@ RSpec.describe BattleBot::Battle do
 
   describe '.fight' do
     it 'returns it\'s log' do
-      expect(battle.fight).to eq(battle.log)
-      # puts battle.log
+      expect(battle.fight[0]).to eq(battle.log)
+    end
+
+    it 'returns the winning player' do
+      expect(battle.fight[1]).to be_a_kind_of BattleBot::Player
     end
   end
 
@@ -41,15 +48,25 @@ RSpec.describe BattleBot::Battle do
       expect(battle.initiative).to all(be_an(BattleBot::Player))
     end
 
-    it 'adds two elements to the log' do
+    it 'adds to the log' do
       battle.initiative
-      expect(battle.log.count).to eq(2)
+      expect(battle.log.count).to eq(1)
     end
   end
 
   describe '.combat' do
     it 'returns true or false' do
-      expect(battle.combat(battle.player1, battle.player2)).to be(true).or be(false)
+      expect(battle.combat(battle.player1, battle.player2)[0]).to be(true).or be(false)
+    end
+
+    it 'returns the winning player' do
+      expect(battle.combat(battle.player1, battle.player2)[1]).to be_a_kind_of BattleBot::Player
+    end
+  end
+
+  describe '.roll_hit' do
+    it 'returns true of false' do
+      expect(battle.roll_hit(player)).to be(true).or be(false)
     end
   end
 
@@ -67,6 +84,13 @@ RSpec.describe BattleBot::Battle do
     end
   end
 
+  describe '.miss' do
+    it 'adds 2 elements to the log' do
+      battle.miss(battle.player1, battle.player2)
+      expect(battle.log.count).to eq(2)
+    end
+  end
+
   describe '.death_check' do
     it 'returns true or false' do
       expect(battle.death_check(battle.player1)).to be(true).or be(false)
@@ -74,9 +98,9 @@ RSpec.describe BattleBot::Battle do
   end
 
   describe '.autopsy' do
-    it 'adds 3 elements to the log' do
+    it 'adds 2 elements to the log' do
       battle.autopsy(player, player2)
-      expect(battle.log.count).to eq(3)
+      expect(battle.log.count).to eq(2)
     end
   end
 end
