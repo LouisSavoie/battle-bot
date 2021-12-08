@@ -3,7 +3,7 @@
 require 'battle_bot/player'
 
 RSpec.describe BattleBot::Player do
-  let(:player) { described_class.new(1, 'Bob', 1, 1, 1) }
+  let(:player) { described_class.new(1, 'Bob', 1, 1, 1, 1) }
 
   it 'has a user_id' do
     expect(player.user_id).to eq(1)
@@ -30,7 +30,7 @@ RSpec.describe BattleBot::Player do
   end
 
   it 'has hit' do
-    expect(player.hit).to eq(0)
+    expect(player.hit).to eq(1)
   end
 
   describe '.level_up' do
