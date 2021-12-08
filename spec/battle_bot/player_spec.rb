@@ -13,6 +13,10 @@ RSpec.describe BattleBot::Player do
     expect(player.name).to eq('Bob')
   end
 
+  it 'has max_health' do
+    expect(player.max_health).to eq(1)
+  end
+
   it 'has health' do
     expect(player.health).to eq(1)
   end
@@ -26,9 +30,17 @@ RSpec.describe BattleBot::Player do
   end
 
   describe '.level_up' do
-    it 'levels up player health, damage, or speed by 1' do
+    it 'levels up player max_health, damage, or speed by 1' do
       stat = player.level_up
       expect(player.send(stat)).to eq(2)
+    end
+  end
+
+  describe '.reset_health' do
+    it 'resets player health to max_health' do
+      player.health = 0
+      player.reset_health
+      expect(player.health).to eq(player.max_health)
     end
   end
 end

@@ -22,6 +22,8 @@ module BattleBot
 
         death = combat(players[1], players[0])
       end
+      player1.reset_health
+      player2.reset_health
       [log, death[1]]
     end
 
