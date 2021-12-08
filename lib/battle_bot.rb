@@ -29,7 +29,10 @@ module BattleBot
     end
 
     bot.command :help do |event|
-      event.respond 'I\'m helpful!'
+      event.respond <<~HELP
+      `bb challenge @user` to challenge someone to a battle!
+      `bb accept @user` to accept a challenge from that person and commence the battle!
+      HELP
     end
 
     bot.command :challenge do |event|
@@ -41,6 +44,9 @@ module BattleBot
         # respond to challenging the bot
         elsif event.message.mentions[0].mention == "<@#{bot.profile.id}>"
           event.respond "#{event.author.mention}, I'm just the ref here."
+        # respond to challenging yourself
+        elsif event.message.mentions[0].mention == "<@#{event.author.id}>"
+          event.respond "#{event.author.mention}, stop hitting yourself, stop hitting yourself!"
         # base case, create the battle
         else
           # create the server if it doesn't exist in db

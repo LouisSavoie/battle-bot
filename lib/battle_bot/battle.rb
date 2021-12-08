@@ -35,8 +35,8 @@ module BattleBot
     end
 
     def roll_initiatives
-      player1_initiative = rand(1..20) + player1.speed
-      player2_initiative = rand(1..20) + player2.speed
+      player1_initiative = rand(1..(20 + player1.speed))
+      player2_initiative = rand(1..(20 + player2.speed))
       [player1_initiative, player2_initiative]
     end
 
