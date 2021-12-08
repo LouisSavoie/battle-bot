@@ -18,7 +18,7 @@ module BattleBot
       until death[0]
         players = initiative
         death = combat(players[0], players[1])
-        next if death
+        next if death[0]
 
         death = combat(players[1], players[0])
       end
