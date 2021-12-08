@@ -64,6 +64,12 @@ RSpec.describe BattleBot::Battle do
     end
   end
 
+  describe '.roll_hit' do
+    it 'returns true of false' do
+      expect(battle.roll_hit(player)).to be(true).or be(false)
+    end
+  end
+
   describe '.attack' do
     before do
       battle.attack(battle.player1, battle.player2)
@@ -74,6 +80,13 @@ RSpec.describe BattleBot::Battle do
     end
 
     it 'adds 2 elements to the log' do
+      expect(battle.log.count).to eq(2)
+    end
+  end
+
+  describe '.miss' do
+    it 'adds 2 elements to the log' do
+      battle.miss(battle.player1, battle.player2)
       expect(battle.log.count).to eq(2)
     end
   end

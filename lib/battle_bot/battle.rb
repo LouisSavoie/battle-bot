@@ -29,7 +29,8 @@ module BattleBot
 
     def initiative
       initiatives = roll_initiatives
-      log.push("\n\n**Initiative**: #{player1.name} got #{initiatives[0]}, #{player2.name} got #{initiatives[1]}")
+      log.push("\n\n__**Initiative**__: **#{player1.name}** got **#{initiatives[0]}**,
+                   **#{player2.name}** got **#{initiatives[1]}**")
       initiatives[0] > initiatives[1] ? [player1, player2] : [player2, player1]
     end
 
@@ -40,10 +41,16 @@ module BattleBot
     end
 
     def combat(attacking_player, defending_player)
-      attack(attacking_player, defending_player)
+      hit = roll_hit(attacking_player)
+      hit ? attack(attacking_player, defending_player) : miss(attacking_player, defending_player)
       death = death_check(defending_player)
       autopsy(defending_player, attacking_player) if death
       [death, attacking_player]
+    end
+
+    def roll_hit(attacking_player)
+      hit = rand(1..(10 + attacking_player.hit))
+      hit > 5
     end
 
     def attack(attacking_player, defending_player)
@@ -51,6 +58,11 @@ module BattleBot
       defending_player.health -= damage
       log.push("\n**#{attacking_player.name}** dealt **#{damage}** damage to **#{defending_player.name}**",
                "\n**#{defending_player.name}'s** health is now **#{defending_player.health}**.")
+    end
+
+    def miss(attacking_player, defending_player)
+      log.push("\n**#{attacking_player.name}** *Missed!*",
+               "\n**#{defending_player.name}'s** health is still **#{defending_player.health}**.")
     end
 
     def death_check(player)

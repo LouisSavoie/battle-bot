@@ -29,6 +29,10 @@ RSpec.describe BattleBot::Player do
     expect(player.speed).to eq(1)
   end
 
+  it 'has hit' do
+    expect(player.hit).to eq(0)
+  end
+
   describe '.level_up' do
     it 'levels up player max_health, damage, or speed by 1' do
       stat = player.level_up
