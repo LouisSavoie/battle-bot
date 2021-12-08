@@ -8,13 +8,21 @@ Dotenv.load
 # Main bot Module
 module BattleBot
   class << self
-    attr_accessor :bot
+    attr_accessor :bot, :db
+
+    def check_for_player(server_id, player_id, player_name)
+      if db.data[server_id].players.include? player_id
+        db.data[server_id].players[player_id]
+      else
+        BattleBot::Player.new player_id, player_name
+      end
+    end
   end
 
   if ENV['BOT_TOKEN']
     self.bot = Discordrb::Commands::CommandBot.new token: ENV['BOT_TOKEN'], prefix: 'bb '
 
-    db = BattleBot::Database.new
+    self.db = BattleBot::Database.new
 
     bot.ready do
       bot.watching = 'bb help'
@@ -38,9 +46,9 @@ module BattleBot
           # create the server if it doesn't exist in db
           db.add_server BattleBot::Server.new event.server.id
           # create players if they don't exist in db>server
-          player1 = BattleBot::Player.new event.author.id, event.author.name
+          player1 = check_for_player event.server.id, event.author.id, event.author.name
+          player2 = check_for_player event.server.id, event.message.mentions[0].id, event.message.mentions[0].name
           db.add_player event.server.id, player1
-          player2 = BattleBot::Player.new event.message.mentions[0].id, event.message.mentions[0].name
           db.add_player event.server.id, player2
           # create battle and add to server
           battle = BattleBot::Battle.new player1, player2
@@ -68,7 +76,6 @@ module BattleBot
           res_arr.each { |res_part| event.respond res_part.join('') }
           db.update_player(event.server.id, res[1])
           db.remove_battle(event.server.id, "#{event.message.mentions[0].id}_#{event.author.id}")
-          puts db.data[event.server.id].players
         # respond if cannot find battle
         else
           event.respond "I cannot find a challenge from #{event.message.mentions[0].mention} for you."
