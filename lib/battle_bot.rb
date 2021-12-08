@@ -30,8 +30,8 @@ module BattleBot
 
     bot.command :help do |event|
       event.respond <<~HELP
-      `bb challenge @user` to challenge someone to a battle!
-      `bb accept @user` to accept a challenge from that person and commence the battle!
+        `bb challenge @user` to challenge someone to a battle!
+        `bb accept @user` to accept a challenge from that person and commence the battle!
       HELP
     end
 
