@@ -92,12 +92,12 @@ module BattleBot
     bot.command :char do |event|
       char = db.data[event.server.id].players[event.author.id]
       event.respond <<~INFO
-      #{event.author.mention}'s Character Info:
-      __**#{char.name}**__
-      Health: **#{char.max_health}**
-      Damage: **#{char.damage}**
-      Speed: **#{char.speed}**
-      Hit: **#{char.hit}**
+        #{event.author.mention}'s Character Info:
+        __**#{char.name}**__
+        Health: **#{char.max_health}**
+        Damage: **#{char.damage}**
+        Speed: **#{char.speed}**
+        Hit: **#{char.hit}**
       INFO
     end
   end
