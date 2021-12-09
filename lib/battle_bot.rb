@@ -90,6 +90,7 @@ module BattleBot
       end
     end
 
+    # rubocop:disable Metrics/BlockNesting
     bot.command :char do |event|
       # ignore messages not in the bb-arena channel
       if event.channel.name == 'bb-arena'
@@ -124,5 +125,6 @@ module BattleBot
         INFO
       end
     end
+    # rubocop:enable Metrics/BlockNesting
   end
 end
