@@ -32,6 +32,7 @@ module BattleBot
       event.respond <<~HELP
         `bb challenge @user` to challenge someone to a battle!
         `bb accept @user` to accept a challenge from that person and commence the battle!
+        `bb char` to view your character stats.
       HELP
     end
 
