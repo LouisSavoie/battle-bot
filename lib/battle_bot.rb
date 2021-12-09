@@ -91,7 +91,15 @@ module BattleBot
     end
 
     bot.command :char do |event|
-      char = db.data[event.server.id].players[event.author.id]
+      # create the server if it doesn't exist in db
+      db.add_server BattleBot::Server.new event.server.id
+      if db.data[event.server.id].players[event.author.id]
+        char = db.data[event.server.id].players[event.author.id]
+      else
+        # create players if they don't exist in db>server
+        char = check_for_player event.server.id, event.author.id, event.author.name
+        db.add_player event.server.id, char
+      end
       event.respond <<~INFO
         #{event.author.mention}'s Character Info:
         __**#{char.name}**__
