@@ -35,6 +35,7 @@ module BattleBot
         `bb challenge @user` to challenge someone to a battle!
         `bb accept @user` to accept a challenge from that person and commence the battle!
         `bb char` to view your character stats.
+        `bb char @user` to view someone else's character stats.
         `bb name <new name>` changes your character's name.
       HELP
     end
