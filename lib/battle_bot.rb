@@ -115,14 +115,19 @@ module BattleBot
             db.add_player event.server.id, char
           end
         end
-        event.respond <<~INFO
-          #{player.mention}'s Character Info:
-          __**#{char.name}**__
-          Health: **#{char.max_health}**
-          Damage: **#{char.damage}**
-          Speed: **#{char.speed}**
-          Hit: **#{char.hit}**
-        INFO
+        # respond to mentioning the bot
+        if event.message.mentions[0] && event.message.mentions[0].mention == "<@#{bot.profile.id}>"
+          event.respond "#{event.author.mention}, I'm just the ref here."
+        else
+          event.respond <<~INFO
+            #{player.mention}'s Character Info:
+            __**#{char.name}**__
+            Health: **#{char.max_health}**
+            Damage: **#{char.damage}**
+            Speed: **#{char.speed}**
+            Hit: **#{char.hit}**
+          INFO
+        end
       end
     end
     # rubocop:enable Metrics/BlockNesting
