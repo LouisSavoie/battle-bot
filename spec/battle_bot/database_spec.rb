@@ -90,4 +90,17 @@ RSpec.describe BattleBot::Database do
       File.delete('test.yaml')
     end
   end
+
+  describe '.change_player_name' do
+    before do
+      database.add_server(test_server, 'test.yaml')
+      database.add_player(555, test_player, 'test.yaml')
+    end
+
+    it 'changes a player\'s name in @data' do
+      database.change_player_name(555, 1, 'Doug', 'test.yaml')
+      expect(database.data[555].players[1].name).to eq('Doug')
+      File.delete('test.yaml')
+    end
+  end
 end

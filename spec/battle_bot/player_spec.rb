@@ -47,4 +47,11 @@ RSpec.describe BattleBot::Player do
       expect(player.health).to eq(player.max_health)
     end
   end
+
+  describe '.change_name' do
+    it 'changes @name to new_name' do
+      player.change_name('Doug')
+      expect(player.name).to eq('Doug')
+    end
+  end
 end
