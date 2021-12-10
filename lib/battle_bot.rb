@@ -141,7 +141,9 @@ module BattleBot
       if event.channel.name == 'bb-arena'
         # create the server if it doesn't exist in db
         db.add_server BattleBot::Server.new event.server.id
-        if db.data[event.server.id].players[event.author.id]
+        if !event.content.slice(8..-1)
+          event.respond 'Nice name, no name. Try agian, cheeky.'
+        elsif db.data[event.server.id].players[event.author.id]
           db.change_player_name(event.server.id, event.author.id, event.content.slice(8..-1))
           char = db.data[event.server.id].players[event.author.id]
         else
@@ -150,14 +152,16 @@ module BattleBot
           db.add_player event.server.id, char
         end
       end
-      event.respond <<~INFO
-        #{event.author.mention}'s Character Info:
-        __**#{char.name}**__
-        Health: **#{char.max_health}**
-        Damage: **#{char.damage}**
-        Speed: **#{char.speed}**
-        Hit: **#{char.hit}**
-      INFO
+      if event.content.slice(8..-1)
+        event.respond <<~INFO
+          #{event.author.mention}'s Character Info:
+          __**#{char.name}**__
+          Health: **#{char.max_health}**
+          Damage: **#{char.damage}**
+          Speed: **#{char.speed}**
+          Hit: **#{char.hit}**
+        INFO
+      end
     end
   end
 end
