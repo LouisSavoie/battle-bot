@@ -35,7 +35,6 @@ GEM
       ast (~> 2.4.1)
     rainbow (3.0.0)
     rake (13.0.3)
-    redis (4.5.1)
     regexp_parser (2.1.1)
     rest-client (2.1.0)
       http-accept (>= 1.7.0, < 2.0)
@@ -89,7 +88,6 @@ DEPENDENCIES
   discordrb
   dotenv (~> 2.1, >= 2.1.1)
   rake (~> 13.0)
-  redis
   rspec (~> 3.0)
   rubocop (~> 1.7)
   rubocop-rake

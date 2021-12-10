@@ -67,5 +67,12 @@ module BattleBot
       write_file(data_file)
       puts 'Database saved to file'
     end
+
+    def change_player_name(server_id, player_id, new_name, data_file = 'data.yaml')
+      @data[server_id].players[player_id].change_name(new_name)
+      puts 'Player.name updated for server in database'
+      write_file(data_file)
+      puts 'Database saved to file'
+    end
   end
 end

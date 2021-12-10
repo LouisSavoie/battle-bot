@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
+
 require 'discordrb'
 require 'dotenv'
 Dir[File.join(__dir__, 'battle_bot', '*.rb')].each { |file| require file }
@@ -33,6 +35,7 @@ module BattleBot
         `bb challenge @user` to challenge someone to a battle!
         `bb accept @user` to accept a challenge from that person and commence the battle!
         `bb char` to view your character stats.
+        `bb name <new name>` changes your character's name.
       HELP
     end
 
@@ -131,5 +134,30 @@ module BattleBot
       end
     end
     # rubocop:enable Metrics/BlockNesting
+
+    bot.command :name do |event|
+      # ignore messages not in the bb-arena channel
+      if event.channel.name == 'bb-arena'
+        # create the server if it doesn't exist in db
+        db.add_server BattleBot::Server.new event.server.id
+        if db.data[event.server.id].players[event.author.id]
+          db.change_player_name(event.server.id, event.author.id, event.content.slice(8..-1))
+          char = db.data[event.server.id].players[event.author.id]
+        else
+          # create player if they don't exist in db>server
+          char = check_for_player event.server.id, event.author.id, event.content.slice(8..-1)
+          db.add_player event.server.id, char
+        end
+      end
+      event.respond <<~INFO
+        #{event.author.mention}'s Character Info:
+        __**#{char.name}**__
+        Health: **#{char.max_health}**
+        Damage: **#{char.damage}**
+        Speed: **#{char.speed}**
+        Hit: **#{char.hit}**
+      INFO
+    end
   end
 end
+# rubocop:enable Metrics/ModuleLength

@@ -29,5 +29,9 @@ module BattleBot
     def reset_health
       @health = @max_health
     end
+
+    def change_name(new_name)
+      @name = new_name
+    end
   end
 end
