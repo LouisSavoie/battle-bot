@@ -32,6 +32,7 @@ module BattleBot
       event.respond <<~HELP
         `bb challenge @user` to challenge someone to a battle!
         `bb accept @user` to accept a challenge from that person and commence the battle!
+        `bb char` to view your character stats.
       HELP
     end
 
@@ -89,16 +90,46 @@ module BattleBot
       end
     end
 
+    # rubocop:disable Metrics/BlockNesting
     bot.command :char do |event|
-      char = db.data[event.server.id].players[event.author.id]
-      event.respond <<~INFO
-        #{event.author.mention}'s Character Info:
-        __**#{char.name}**__
-        Health: **#{char.max_health}**
-        Damage: **#{char.damage}**
-        Speed: **#{char.speed}**
-        Hit: **#{char.hit}**
-      INFO
+      # ignore messages not in the bb-arena channel
+      if event.channel.name == 'bb-arena'
+        # create the server if it doesn't exist in db
+        db.add_server BattleBot::Server.new event.server.id
+        if event.message.mentions[0]
+          player = event.message.mentions[0]
+          if db.data[event.server.id].players[event.message.mentions[0].id]
+            char = db.data[event.server.id].players[event.message.mentions[0].id]
+          else
+            # create player if they don't exist in db>server
+            char = check_for_player event.server.id, event.message.mentions[0].id, event.message.mentions[0].name
+            db.add_player event.server.id, char
+          end
+        else
+          player = event.author
+          if db.data[event.server.id].players[event.author.id]
+            char = db.data[event.server.id].players[event.author.id]
+          else
+            # create player if they don't exist in db>server
+            char = check_for_player event.server.id, event.author.id, event.author.name
+            db.add_player event.server.id, char
+          end
+        end
+        # respond to mentioning the bot
+        if event.message.mentions[0] && event.message.mentions[0].mention == "<@#{bot.profile.id}>"
+          event.respond "#{event.author.mention}, I'm just the ref here."
+        else
+          event.respond <<~INFO
+            #{player.mention}'s Character Info:
+            __**#{char.name}**__
+            Health: **#{char.max_health}**
+            Damage: **#{char.damage}**
+            Speed: **#{char.speed}**
+            Hit: **#{char.hit}**
+          INFO
+        end
+      end
     end
+    # rubocop:enable Metrics/BlockNesting
   end
 end
