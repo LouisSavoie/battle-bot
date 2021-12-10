@@ -143,6 +143,8 @@ module BattleBot
         db.add_server BattleBot::Server.new event.server.id
         if !event.content.slice(8..-1)
           event.respond 'Nice name, no name. Try agian, cheeky.'
+        elsif event.content.slice(8..-1).length > 50
+          event.respond 'That\'s one hell of a name. A bit long tho.'
         elsif db.data[event.server.id].players[event.author.id]
           db.change_player_name(event.server.id, event.author.id, event.content.slice(8..-1))
           char = db.data[event.server.id].players[event.author.id]
@@ -152,7 +154,7 @@ module BattleBot
           db.add_player event.server.id, char
         end
       end
-      if event.content.slice(8..-1)
+      if event.content.slice(8..-1) && event.content.slice(8..-1).length <= 50
         event.respond <<~INFO
           #{event.author.mention}'s Character Info:
           __**#{char.name}**__
